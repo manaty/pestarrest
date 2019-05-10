@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Pest.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/Concept_BG_5.png" type="Texture" id=3]
+[ext_resource path="res://GUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sounds/aie1.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 123.449, 183.317 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+Pest = ExtResource( 2 )
+
+[node name="PestTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 638.172, 359.67 )
+scale = Vector2( 0.66945, 0.664203 )
+texture = ExtResource( 3 )
+
+[node name="GUI" parent="." instance=ExtResource( 4 )]
+anchor_bottom = 1.0
+margin_top = 19.0
+margin_right = 1236.0
+margin_bottom = 72.0
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="StingZone" type="Area2D" parent="."]
+position = Vector2( 1142.11, 430.057 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StingZone"]
+position = Vector2( -0.182495, -36.0914 )
+shape = SubResource( 1 )
+
+[node name="Face" type="Node2D" parent="StingZone"]
+position = Vector2( 4.60156, -53.4724 )
+
+[node name="aie" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="timeout" from="PestTimer" to="." method="_on_PestTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
+[connection signal="body_entered" from="StingZone" to="." method="_on_StingZone_body_entered"]
