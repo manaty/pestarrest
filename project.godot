@@ -27,6 +27,11 @@ window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="mosquito"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
