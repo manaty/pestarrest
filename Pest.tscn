@@ -41,7 +41,6 @@ script = ExtResource( 1 )
 position = Vector2( -136.361, -106.492 )
 frames = SubResource( 1 )
 animation = "mosquito"
-frame = 3
 playing = true
 centered = false
 flip_h = true

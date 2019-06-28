@@ -5,9 +5,9 @@ onready var MosquitoContainer = get_node("MosquitoContainer")
 
 var screensize
 var level = 1
-var spawnLimit = 50
+var spawnLimit = 100
 var playerScore = 0
-var damage = 3
+var spawnCount = 5
 
 func _ready():
 	randomize()
@@ -28,22 +28,22 @@ func spawn_mosquitoes(num):
 		MosquitoContainer.add_child(mosquito)
 		mosquito.position = $MosquitoPath/MosquitoSpawnLocation.position
 		mosquito.connect("killed", self, "_on_Mosquito_Killed")
-		mosquito.connect("feed", self, "_on_Mosquito_Feed")
+		mosquito.connect("feed", self, "_on_Mosquito_Feed", [mosquito])
 		spawnLimit-=1
 
 func _on_Mosquito_Killed():	
 	playerScore += 1
-	print(playerScore)
 	$GameHUD.update_score(playerScore)
 	
 
-func _on_Mosquito_Feed():
-	print("Yummy ...")	
-	$Player.drain_life(damage)
-	$GameHUD.update_life($Player.hp)
+func _on_Mosquito_Feed(mosquito):
+	if mosquito.get("state") == "attacking":
+		$Player.drain_life(mosquito.damage)
+		mosquito.suck_blood($Player)
+		$GameHUD.update_life($Player.hp)
 
 func _on_SpawnMosquitoTimer_timeout():	
 	if spawnLimit > 0:
-		spawn_mosquitoes(2)
+		spawn_mosquitoes(spawnCount)
 	else:
 		pass

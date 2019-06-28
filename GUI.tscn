@@ -19,10 +19,12 @@ margin_right = -19.0
 margin_bottom = 64.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_right = 1233.0
 margin_bottom = 53.0
 
 [node name="Bars" type="VBoxContainer" parent="HBoxContainer"]
+editor/display_folded = true
 margin_right = 1099.0
 margin_bottom = 53.0
 size_flags_horizontal = 3
@@ -69,6 +71,7 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
 [node name="Counters" type="HBoxContainer" parent="HBoxContainer"]
+editor/display_folded = true
 margin_left = 1103.0
 margin_right = 1233.0
 margin_bottom = 53.0
