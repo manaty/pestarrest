@@ -16,13 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="pestarrest"
-run/main_scene="res://StageOne.tscn"
+run/main_scene="res://title_screen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
+window/size/resizable=false
 window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"

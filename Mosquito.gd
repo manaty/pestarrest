@@ -60,6 +60,7 @@ func _on_Mosquito_input_event(viewport, event, shape_idx):
 	and event.button_index == BUTTON_LEFT \
 	and event.is_pressed()\
 	and (state == "flying" || state == "attacking" || state=="sated") :
+		print("killed mosquito") 
 		state="dead"
 		$AnimatedSprite.play("squish")
 		emit_signal("killed")

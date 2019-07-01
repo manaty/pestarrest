@@ -19,7 +19,6 @@ margin_right = -19.0
 margin_bottom = 64.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_right = 1233.0
 margin_bottom = 53.0
 
