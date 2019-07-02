@@ -4,24 +4,27 @@ export (PackedScene) var Mosquito
 onready var MosquitoContainer = get_node("MosquitoContainer")
 onready var GameHUD = get_node("GameHUD")
 
+const SPAWN_LIMIT = 100
+const SPAWN_COUNT = 5
+
+
 var screensize
 var level = 1
-var spawnLimit = 100
+var spawnLimit = SPAWN_LIMIT
+var spawnCount = SPAWN_COUNT
 var playerScore = 0
-var spawnCount = 5
 var gameStatus = "active"
 
 func _ready():
 	randomize()
 	screensize = get_viewport().get_visible_rect().size	
 	init_game()
-	set_process(true)
-		
+	set_process(true)		
 
 func init_game():
 	level = 1
 	playerScore = 0
-	spawnCount = 5
+	spawnCount = SPAWN_COUNT
 	gameStatus = "active"
 	$Player.init_life()	
 	$Lullaby.play()
@@ -52,11 +55,9 @@ func _on_Mosquito_Killed():
 	playerScore += 1
 	$GameHUD.update_score(playerScore)
 	
-
 func _on_Mosquito_Feed(mosquito):
 	if mosquito.get("state") == "attacking":
 		$Player.drain_life(mosquito.damage)
-		mosquito.suck_blood($Player)
 		$GameHUD.update_life($Player.hp)
 
 func _on_SpawnMosquitoTimer_timeout():	
@@ -78,9 +79,7 @@ func retry():
 	GameHUD.hide_game_over()
 	$GameOver.stop()
 	kill_all_mosquitoes()
-		
-		
-
+				
 func _on_GameHUD_retry():
 	retry()
 	init_game()

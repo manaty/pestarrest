@@ -3,12 +3,19 @@ extends KinematicBody2D
 signal killed
 signal feed
 
-export var min_speed = 100  # Minimum speed range
-export var max_speed = 500  # Maximum speed range
-export var damage = 3 # Mosquito damage per bite
-var speed = rand_range(min_speed, max_speed)
+const MIN_SPEED = 100  # Minimum speed range
+const MAX_SPEED = 500  # Maximum speed range
+const STATES = {
+	"FLYING": "flying",
+	"ATTACKING": "attacking",
+	"SATED": "sated",
+	"DEAD": "dead"
+};
 
-var state="flying"
+export var damage = 3 # Mosquito damage per bite
+var speed = rand_range(MIN_SPEED, MAX_SPEED)
+
+var state= STATES.FLYING
 var direction = 1
 var yDirection = 1
 var screensize
@@ -17,7 +24,7 @@ var bloodCount = 0
 
 func _ready():
 	randomize()
-	$AnimatedSprite.play("flying")
+	$AnimatedSprite.play(STATES.FLYING)
 	$AnimatedSprite.scale = Vector2(0.4, 0.4)
 	$Buzz.play()
 	screensize = get_viewport_rect().size
@@ -28,7 +35,7 @@ func _physics_process(delta):
 	else:
 		$AnimatedSprite.flip_h = false
 		
-	if state == "flying":
+	if state == STATES.FLYING:
 		velocity.x = speed * direction
 		velocity.y = speed * yDirection
 		
@@ -38,7 +45,7 @@ func _physics_process(delta):
 			for i in range(get_slide_count()):
 				var pest = get_slide_collision(i).collider
 				if "Mosquito" in pest.name:										
-					if pest.get("state") == "attacking" || pest.get("state") == "sated":
+					if pest.get("state") == STATES.ATTACKING || pest.get("state") == STATES.SATED:
 						add_collision_exception_with(pest)
 					else:	
 						direction = direction * -1
@@ -50,7 +57,7 @@ func _physics_process(delta):
 		if position.y < 0 	|| position.y > screensize.y:
 			yDirection = yDirection * - 1	
 											
-	elif state=="sated":
+	elif state== STATES.SATED:
 		velocity.x = (speed * 3) * direction
 		velocity = move_and_slide(velocity)						
 
@@ -59,9 +66,8 @@ func _on_Mosquito_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton \
 	and event.button_index == BUTTON_LEFT \
 	and event.is_pressed()\
-	and (state == "flying" || state == "attacking" || state=="sated") :
-		print("killed mosquito") 
-		state="dead"
+	and (state == STATES.FLYING || state == STATES.ATTACKING || state==STATES.SATED) :		
+		state=STATES.DEAD
 		$AnimatedSprite.play("squish")
 		emit_signal("killed")
 		$CollisionShape2D.queue_free()
@@ -71,11 +77,11 @@ func _on_Mosquito_input_event(viewport, event, shape_idx):
 				
 			
 func feed():	
-	state = "attacking"			
+	state = STATES.ATTACKING			
 	$FeedTimer.start()
 
-func suck_blood(player):
-	pass
+func set_damage(dmg):
+	damage = dmg
 
 func _on_DeathTimer_timeout():
 	queue_free()
@@ -89,7 +95,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_FeedTimer_timeout():			
 	if bloodCount >= 15: 
-		state = "sated"
+		state = STATES.SATED
 		$FeedTimer.stop()
 	else:
 		bloodCount += damage

@@ -7,7 +7,6 @@ onready var player_score_counter = get_node("GUI/HBoxContainer/Counters/Counter/
 onready var player_life_gauge = get_node("GUI/HBoxContainer/Bars/Bar/Gauge")
 onready var game_msg_label = get_node("MessageMarginContainer/HBoxContainer/GameMsgLabel")
 
-
 func game_start_message(msg):	
 	update_game_msg_label(msg)
 	$MessageMarginContainer.show()

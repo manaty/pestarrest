@@ -2,18 +2,18 @@
 
 [ext_resource path="res://Mosquito.gd" type="Script" id=1]
 [ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010000.png" type="Texture" id=2]
-[ext_resource path="res://sprites/SPLAT.png" type="Texture" id=3]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010001.png" type="Texture" id=4]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010002.png" type="Texture" id=5]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010003.png" type="Texture" id=6]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010004.png" type="Texture" id=7]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010005.png" type="Texture" id=8]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010006.png" type="Texture" id=9]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010007.png" type="Texture" id=10]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010008.png" type="Texture" id=11]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010009.png" type="Texture" id=12]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010010.png" type="Texture" id=13]
-[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010011.png" type="Texture" id=14]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010001.png" type="Texture" id=3]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010002.png" type="Texture" id=4]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010003.png" type="Texture" id=5]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010004.png" type="Texture" id=6]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010005.png" type="Texture" id=7]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010006.png" type="Texture" id=8]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010007.png" type="Texture" id=9]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010008.png" type="Texture" id=10]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010009.png" type="Texture" id=11]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010010.png" type="Texture" id=12]
+[ext_resource path="res://sprites/MOSQUITO/00_MOSQUITO_010011.png" type="Texture" id=13]
+[ext_resource path="res://sprites/SPLAT.png" type="Texture" id=14]
 [ext_resource path="res://sounds/mosquito-buzz.wav" type="AudioStream" id=15]
 [ext_resource path="res://sounds/splat-1.wav" type="AudioStream" id=16]
 
@@ -24,15 +24,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": false,
-"name": "squish",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "flying",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": false,
+"name": "squish",
+"speed": 0.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]

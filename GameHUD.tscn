@@ -40,6 +40,8 @@ margin_right = 640.0
 margin_bottom = 92.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.921569, 0.364706, 0.054902, 1 )
+custom_constants/shadow_offset_y = 4
 
 [node name="ButtonMarginContainer" type="MarginContainer" parent="."]
 visible = false
