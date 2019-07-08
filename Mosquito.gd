@@ -2,9 +2,12 @@ extends KinematicBody2D
 
 signal killed
 signal feed
+signal deal_damage
+signal boss_defeated
 
 const MIN_SPEED = 100  # Minimum speed range
 const MAX_SPEED = 500  # Maximum speed range
+
 const STATES = {
 	"FLYING": "flying",
 	"ATTACKING": "attacking",
@@ -12,20 +15,28 @@ const STATES = {
 	"DEAD": "dead"
 };
 
+const PEST_TYPE = {
+	"BOSS": "BOSS",
+	"MINION": "MINION"
+};
+
 export var damage = 3 # Mosquito damage per bite
 var speed = rand_range(MIN_SPEED, MAX_SPEED)
+onready var SlapSound = get_tree().get_root().get_node("StageOne").get_node("Slap")
 
+
+var pestType = PEST_TYPE.MINION
 var state= STATES.FLYING
 var direction = 1
 var yDirection = 1
 var screensize
 var velocity = Vector2(rand_range(0, 1200), rand_range(0, 700))
 var bloodCount = 0
+var hp = 1
 
 func _ready():
 	randomize()
 	$AnimatedSprite.play(STATES.FLYING)
-	$AnimatedSprite.scale = Vector2(0.4, 0.4)
 	$Buzz.play()
 	screensize = get_viewport_rect().size
 	
@@ -65,20 +76,43 @@ func _physics_process(delta):
 func _on_Mosquito_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton \
 	and event.button_index == BUTTON_LEFT \
-	and event.is_pressed()\
-	and (state == STATES.FLYING || state == STATES.ATTACKING || state==STATES.SATED) :		
+	and event.is_pressed():
+		SlapSound.play()
+		if (state == STATES.FLYING || state == STATES.ATTACKING || state==STATES.SATED) :		
+			hit()				
+
+func hit():
+	hp = hp - 1
+	
+	if hp <= 0:
 		state=STATES.DEAD
 		$AnimatedSprite.play("squish")
 		emit_signal("killed")
 		$CollisionShape2D.queue_free()
 		$Splat.play()
 		$Buzz.queue_free()
-		$DeathTimer.start()
-				
+		$DeathTimer.start()		
+		if 	pestType == PEST_TYPE.BOSS:
+			emit_signal("boss_defeated")
 			
 func feed():	
 	state = STATES.ATTACKING			
 	$FeedTimer.start()
+	
+func deal_damage():
+	emit_signal("deal_damage")
+
+func set_state(status):
+	state = status
+	
+func set_type(type):
+	pestType = type	
+	
+func set_hp(life):
+	hp = life	
+	
+func get_type():
+	return pestType	
 
 func set_damage(dmg):
 	damage = dmg

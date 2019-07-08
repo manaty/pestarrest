@@ -11,6 +11,12 @@ func game_start_message(msg):
 	update_game_msg_label(msg)
 	$MessageMarginContainer.show()
 	game_msg_label.show()
+	
+func show_level_won():
+	update_game_msg_label("Level cleared")
+	$MessageMarginContainer.show()
+	game_msg_label.show()
+	$ButtonMarginContainer.show()	
 
 func show_game_over():
 	update_game_msg_label("Game over")

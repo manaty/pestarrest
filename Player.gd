@@ -12,7 +12,10 @@ func _physics_process(delta):
 	
 func _on_Player_body_entered(body):
 	if "Mosquito" in body.name:
-		body.feed()
+		if body.get_type() == "BOSS":
+			body.deal_damage()
+		else:	
+			body.feed()
 
 func init_life():
 	hp = 100

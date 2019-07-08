@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://StageOne.gd" type="Script" id=1]
 [ext_resource path="res://Mosquito.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sounds/Nap Time.wav" type="AudioStream" id=6]
 [ext_resource path="res://sounds/Music Box Game Over III.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/slap.wav" type="AudioStream" id=8]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -33,6 +34,10 @@ wait_time = 5.0
 
 [node name="MosquitoContainer" type="Node" parent="."]
 
+[node name="BossTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="MosquitoPath" type="Path2D" parent="."]
 editor/display_folded = true
 curve = SubResource( 1 )
@@ -48,7 +53,11 @@ stream = ExtResource( 6 )
 [node name="GameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
+[node name="Slap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
 [connection signal="retry" from="GameHUD" to="." method="_on_GameHUD_retry"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="SpawnMosquitoTimer" to="." method="_on_SpawnMosquitoTimer_timeout"]
+[connection signal="timeout" from="BossTimer" to="." method="_on_BossTimer_timeout"]
 [connection signal="player_died" from="Player" to="." method="_on_Player_player_died"]
