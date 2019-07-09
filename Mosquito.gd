@@ -22,7 +22,7 @@ const PEST_TYPE = {
 
 export var damage = 3 # Mosquito damage per bite
 var speed = rand_range(MIN_SPEED, MAX_SPEED)
-onready var SlapSound = get_tree().get_root().get_node("StageOne").get_node("Slap")
+#onready var SlapSound = get_tree().get_root().get_node("StageOne").get_node("Slap")
 
 
 var pestType = PEST_TYPE.MINION
@@ -57,7 +57,7 @@ func _physics_process(delta):
 				var pest = get_slide_collision(i).collider
 				if "Mosquito" in pest.name:										
 					if pest.get("state") == STATES.ATTACKING || pest.get("state") == STATES.SATED:
-						add_collision_exception_with(pest)
+						add_collision_exception_with(pest)						
 					else:	
 						direction = direction * -1
 						yDirection = yDirection * - 1
@@ -76,8 +76,7 @@ func _physics_process(delta):
 func _on_Mosquito_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton \
 	and event.button_index == BUTTON_LEFT \
-	and event.is_pressed():
-		SlapSound.play()
+	and event.is_pressed():	
 		if (state == STATES.FLYING || state == STATES.ATTACKING || state==STATES.SATED) :		
 			hit()				
 

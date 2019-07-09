@@ -4,7 +4,7 @@ export (PackedScene) var Mosquito
 onready var MosquitoContainer = get_node("MosquitoContainer")
 onready var GameHUD = get_node("GameHUD")
 
-const SPAWN_LIMIT = 20
+const SPAWN_LIMIT = 25
 const SPAWN_COUNT = 5
 const BOSS_HP = 10
 
@@ -22,12 +22,20 @@ var spawnCount = SPAWN_COUNT
 var playerScore = 0
 var gameStatus = "active"
 var spawnedMosquito = 0
+var hand = load("res://sprites/hand.png")
 
 func _ready():
 	randomize()
 	screensize = get_viewport().get_visible_rect().size	
+	Input.set_custom_mouse_cursor(hand)
 	init_game()
-	set_process(true)		
+	set_process(true)
+	
+func _input(event):
+	if event is InputEventMouseButton \
+	and event.button_index == BUTTON_LEFT \
+	and event.is_pressed():
+		$Slap.play()				
 
 func init_game():
 	level = 1
@@ -65,7 +73,7 @@ func spawn_mosquitoes(num):
 	for i in range(num):		
 		$MosquitoPath/MosquitoSpawnLocation.offset = randi()
 		var mosquito = Mosquito.instance()
-		mosquito.get_node("AnimatedSprite").scale = Vector2(0.4, 0.4)
+		mosquito.get_node("AnimatedSprite").scale = Vector2(0.4, 0.4)		
 		MosquitoContainer.add_child(mosquito)
 		mosquito.position = $MosquitoPath/MosquitoSpawnLocation.position
 		mosquito.connect("killed", self, "_on_Mosquito_Killed")
@@ -74,6 +82,7 @@ func spawn_mosquitoes(num):
 		spawnedMosquito += 1				
 
 func _on_Boss_Defeated():
+	$GameWon.play()
 	GameHUD.show_level_won()
 	
 func _on_Deal_Damage(mosquito):
