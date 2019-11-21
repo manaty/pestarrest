@@ -12,7 +12,8 @@ const STATES = {
 	"FLYING": "flying",
 	"ATTACKING": "attacking",
 	"SATED": "sated",
-	"DEAD": "dead"
+	"DEAD": "dead",
+	"BOSS_FLYING": "boss_flying",
 };
 
 const PEST_TYPE = {
@@ -36,7 +37,10 @@ var hp = 1
 
 func _ready():
 	randomize()
-	$AnimatedSprite.play(STATES.FLYING)
+	if pestType == PEST_TYPE.BOSS:
+		$AnimatedSprite.play(STATES.BOSS_FLYING)
+	else: 
+		$AnimatedSprite.play(STATES.FLYING)
 	$Buzz.play()
 	screensize = get_viewport_rect().size
 	
@@ -85,7 +89,10 @@ func hit():
 	
 	if hp <= 0:
 		state=STATES.DEAD
-		$AnimatedSprite.play("squish")
+		if pestType == PEST_TYPE.BOSS:
+		   $AnimatedSprite.play("boss_splat")
+		else:
+			$AnimatedSprite.play("splat")
 		emit_signal("killed")
 		$CollisionShape2D.queue_free()
 		$Splat.play()

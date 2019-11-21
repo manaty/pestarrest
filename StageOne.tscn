@@ -2,7 +2,7 @@
 
 [ext_resource path="res://StageOne.gd" type="Script" id=1]
 [ext_resource path="res://Mosquito.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/Concept_BG_5.png" type="Texture" id=3]
+[ext_resource path="res://sprites/room_bg.jpg" type="Texture" id=3]
 [ext_resource path="res://GameHUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sounds/Nap Time.wav" type="AudioStream" id=6]
@@ -36,7 +36,7 @@ wait_time = 5.0
 [node name="MosquitoContainer" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1150, 370 )
+position = Vector2( 1160, 410 )
 
 [node name="MosquitoPath" type="Path2D" parent="."]
 editor/display_folded = true

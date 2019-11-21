@@ -73,7 +73,7 @@ func spawn_mosquitoes(num):
 	for i in range(num):		
 		$MosquitoPath/MosquitoSpawnLocation.offset = randi()
 		var mosquito = Mosquito.instance()
-		mosquito.get_node("AnimatedSprite").scale = Vector2(0.4, 0.4)		
+		#mosquito.get_node("AnimatedSprite").scale = Vector2(0.4, 0.4)		
 		MosquitoContainer.add_child(mosquito)
 		mosquito.position = $MosquitoPath/MosquitoSpawnLocation.position
 		mosquito.connect("killed", self, "_on_Mosquito_Killed")

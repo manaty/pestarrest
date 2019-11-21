@@ -24,4 +24,19 @@ func init_life():
 func drain_life(attack):
 	hp = hp - attack
 	if hp == 0:
-		status = "dead"		
+		status = "dead"
+	
+	if hp >= 50:			
+		$AnimatedSprite.play("scratch")
+		$ScratchTimer.start()	
+	
+	if hp < 50:
+		$AnimatedSprite.play("wince")
+		$WinceTimer.start()
+
+func _on_WinceTimer_timeout():
+	$AnimatedSprite.play("idle")
+
+
+func _on_ScratchTimer_timeout():
+	$AnimatedSprite.play("idle")

@@ -1,20 +1,80 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/player/wince/WINCE00.png" type="Texture" id=2]
+[ext_resource path="res://sprites/player/scratch/SCRATCH00.png" type="Texture" id=3]
+[ext_resource path="res://sprites/player/scratch/SCRATCH01.png" type="Texture" id=4]
+[ext_resource path="res://sprites/player/scratch/SCRATCH02.png" type="Texture" id=5]
+[ext_resource path="res://sprites/player/scratch/SCRATCH03.png" type="Texture" id=6]
+[ext_resource path="res://sprites/player/scratch/SCRATCH04.png" type="Texture" id=7]
+[ext_resource path="res://sprites/player/scratch/SCRATCH05.png" type="Texture" id=8]
+[ext_resource path="res://sprites/player/scratch/SCRATCH06.png" type="Texture" id=9]
+[ext_resource path="res://sprites/player/scratch/SCRATCH07.png" type="Texture" id=10]
+[ext_resource path="res://sprites/player/scratch/SCRATCH08.png" type="Texture" id=11]
+[ext_resource path="res://sprites/player/scratch/SCRATCH09.png" type="Texture" id=12]
+[ext_resource path="res://sprites/player/scratch/SCRATCH10.png" type="Texture" id=13]
+[ext_resource path="res://sprites/player/scratch/SCRATCH11.png" type="Texture" id=14]
+[ext_resource path="res://sprites/player/scratch/SCRATCH12.png" type="Texture" id=15]
+[ext_resource path="res://sprites/player/scratch/SCRATCH13.png" type="Texture" id=16]
+[ext_resource path="res://sprites/player/scratch/SCRATCH14.png" type="Texture" id=17]
+[ext_resource path="res://sprites/player/scratch/SCRATCH15.png" type="Texture" id=18]
+[ext_resource path="res://sprites/player/scratch/SCRATCH16.png" type="Texture" id=19]
+[ext_resource path="res://sprites/player/scratch/SCRATCH17.png" type="Texture" id=20]
+[ext_resource path="res://sprites/player/wince/WINCE01.png" type="Texture" id=21]
+[ext_resource path="res://sprites/player/wince/WINCE02.png" type="Texture" id=22]
+[ext_resource path="res://sprites/player/wince/WINCE03.png" type="Texture" id=23]
+[ext_resource path="res://sprites/player/wince/WINCE04.png" type="Texture" id=24]
+[ext_resource path="res://sprites/player/wince/WINCE05.png" type="Texture" id=25]
+[ext_resource path="res://sprites/player/wince/WINCE06.png" type="Texture" id=26]
+[ext_resource path="res://sprites/player/wince/WINCE07.png" type="Texture" id=27]
+[ext_resource path="res://sprites/player/wince/WINCE08.png" type="Texture" id=28]
+[ext_resource path="res://sprites/player/wince/WINCE09.png" type="Texture" id=29]
+[ext_resource path="res://sprites/player/wince/WINCE10.png" type="Texture" id=30]
+[ext_resource path="res://sprites/player/wince/WINCE11.png" type="Texture" id=31]
+[ext_resource path="res://sprites/player/wince/WINCE12.png" type="Texture" id=32]
+[ext_resource path="res://sprites/player/wince/WINCE13.png" type="Texture" id=33]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "scratch",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "wince",
+"speed": 12.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 30 )
+extents = Vector2( 50, 50 )
 
 [node name="Player" type="Area2D"]
 collision_mask = 2
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 2 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -420.889, -76 )
+scale = Vector2( 0.564815, 0.564815 )
+frames = SubResource( 2 )
+animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -10 )
 shape = SubResource( 1 )
 
+[node name="WinceTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="ScratchTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="timeout" from="WinceTimer" to="." method="_on_WinceTimer_timeout"]
+[connection signal="timeout" from="ScratchTimer" to="." method="_on_ScratchTimer_timeout"]
