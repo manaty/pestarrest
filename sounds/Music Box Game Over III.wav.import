@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Music Box Game Over III.wav-cfeaa21c4a8c50523cf1fa9f9172eeb9.sample"
+
+[deps]
+
+source_file="res://sounds/Music Box Game Over III.wav"
+dest_files=[ "res://.import/Music Box Game Over III.wav-cfeaa21c4a8c50523cf1fa9f9172eeb9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

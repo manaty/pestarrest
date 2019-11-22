@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mosquito-buzz.wav-68eb78bcca7c01f35d9ac862a33b5796.sample"
+
+[deps]
+
+source_file="res://sounds/mosquito-buzz.wav"
+dest_files=[ "res://.import/mosquito-buzz.wav-68eb78bcca7c01f35d9ac862a33b5796.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
